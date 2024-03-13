@@ -7,3 +7,5 @@
 3. `yarn add express`
 
 4. `yarn add typescript -D`
+
+5. `tsc --init`
