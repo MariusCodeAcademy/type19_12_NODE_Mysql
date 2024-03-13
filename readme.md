@@ -1,19 +1,21 @@
-# Start
+# Praktika
 
-1. npm init -y
+## tripsRouter.ts
 
-2.`yarn add nodemon -D`
+1. panaudoti dbQueryWithData ir sukurti nauja irasa
+2. DELETE /trips/:id - pakeicia is_deleted i true
 
-3. `yarn add express`
+3. GET /trips/archive - grazina visus istrintus irasus
 
-4. `yarn add typescript -D`
+## counties lentele
 
-5. `tsc --init`
+1. sukurti lentele "countries" su laukais: id, name, description, is_deleted
+2. sukurti 3 irasus
 
-6. sukurti scripta paleisti typescript generavima su sureagavimu i pakeitimus
+## countrieRouter.ts
 
-7. sukurti scripta su nodemon kuris stebetu pakeitimus dist
-
-8. yarn add @types/express -D;
-   yarn add @types/morgan -D;
-   yarn add @types/cors -D;
+1. sukurti nauja routeri
+2. GET /countries - grazinti visus irasus
+3. GET /countries/:id - grazinti viena irasa pagal id
+4. POST /countries - sukurti nauja irasa (paduodam name, description)
+5. DELETE /countries/:id - istrinti irasa
