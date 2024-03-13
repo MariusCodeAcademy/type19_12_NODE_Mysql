@@ -5,3 +5,18 @@ GET http://localhost:3000/trips4004
 
 ### Get single Trip
 GET http://localhost:3000/trips/1
+
+### Create trip
+POST http://localhost:3000/trips
+Content-Type: application/json
+
+{
+    "name": "Trip to Paris",
+    "date": "2021-10-09",
+    "country": "France",
+    "city": "Paris",
+    "rating": 5,
+    "description": "Paris is the capital of France",
+    "price": 1000,
+    "user_id": 2
+}

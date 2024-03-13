@@ -54,4 +54,14 @@ tripsRouter.get('/:tripId', async (req, res) => {
   res.json(rows[0]);
 });
 
+// - POST /trips - sukurti nauja irasa
+tripsRouter.post('/', async (req, res) => {
+  // tai kas atsiusta gyvena ?
+
+  const atsiusta = req.body;
+  console.log('atsiusta ===', atsiusta);
+
+  res.json('creating post');
+});
+
 export default tripsRouter;
