@@ -7,8 +7,8 @@ export default async function dbQueryWithData(sql: string, argArr: (string | num
     // prisijungti prie DB
     conn = await mysql.createConnection(dbConfig);
     // atlikti veikma
-    const [rows, fields] = await conn.execute(sql, argArr);
-    console.log('fields ===', fields);
+    const [rows, _fields] = await conn.execute(sql, argArr);
+    // console.log('fields ===', fields);
     // grazinti duomenis
     return [rows, null];
   } catch (error) {
