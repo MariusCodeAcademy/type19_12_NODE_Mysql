@@ -8,6 +8,10 @@ const app = express();
 
 const port = 3000;
 
+// atspaudinti dbConfig server js
+
+// atsikopijuoti test funkcija prisijungimui prie db
+
 // MIddleware
 app.use(morgan('dev'));
 app.use(cors());
