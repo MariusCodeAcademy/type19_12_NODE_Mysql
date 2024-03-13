@@ -1,16 +1,18 @@
+import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-// import mysql from 'mysql2';
+
 import tripsRouter from './routes/tripRoutes.js';
+import { PORT } from './config.js';
+import testConnection from './helpers/msqlTestRoute.js';
 
 const app = express();
 
-const port = 3000;
-
-// atspaudinti dbConfig server js
+const port = PORT || 5000;
 
 // atsikopijuoti test funkcija prisijungimui prie db
+testConnection();
 
 // MIddleware
 app.use(morgan('dev'));
