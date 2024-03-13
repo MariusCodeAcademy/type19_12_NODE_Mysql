@@ -19,6 +19,12 @@ app.get('/', (_req, res) => {
 // Routes
 app.use('/trips', tripsRouter);
 
+// 404
+
+app.use((req, res) => {
+  res.status(404).json({ error: 'Path not found', path: req.url });
+});
+
 app.listen(port, () => {
   console.log(`Server runing on http://localhost:${port}`);
 });
