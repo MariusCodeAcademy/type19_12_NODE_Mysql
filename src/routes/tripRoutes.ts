@@ -2,6 +2,7 @@
 import express from 'express';
 import dbQueryWithData from '../helpers/helper.js';
 import { TripObjType } from '../helpers/types.js';
+import { ResultSetHeader } from 'mysql2';
 
 const tripsRouter = express.Router();
 
@@ -58,10 +59,25 @@ tripsRouter.get('/:tripId', async (req, res) => {
 tripsRouter.post('/', async (req, res) => {
   // tai kas atsiusta gyvena ?
 
-  const atsiusta = req.body;
-  console.log('atsiusta ===', atsiusta);
+  const { name, date, country, city, rating, description, price, user_id } = req.body as Omit<
+    TripObjType,
+    'id'
+  >;
+  // validation
+  const argArr = [name, date, country, city, rating, description, price, user_id];
 
-  res.json('creating post');
+  // panaudoti dbQueryWithData ir sukurti nauja irasa
+
+  // jei sekmingai sukurta grzinti naujai sukurto iraso id
+  // grazinti pilna nauja objekta
+
+  // sukurimo rezultato tipas yra ResultSetHeader
+  let rez: ResultSetHeader;
+
+  res.json(argArr);
 });
+
+// - DELETE /trips/:id - istrinti irasa
+//
 
 export default tripsRouter;

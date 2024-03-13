@@ -11,12 +11,12 @@ POST http://localhost:3000/trips
 Content-Type: application/json
 
 {
-    "name": "Trip to Paris",
-    "date": "2021-10-09",
-    "country": "France",
-    "city": "Paris",
-    "rating": 5,
-    "description": "Paris is the capital of France",
-    "price": 1000,
+    "name": "Trip to Uzbekistan",
+    "date": "204-10-09",
+    "country": "Uzbekistan",
+    "city": "Tumur",
+    "rating": 4,
+    "description": "Uzbekistan is very beautiful",
+    "price": 700,
     "user_id": 2
 }
