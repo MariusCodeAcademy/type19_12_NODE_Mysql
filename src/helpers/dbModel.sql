@@ -9,7 +9,7 @@ CREATE TABLE trips (
     rating INT NOT NULL,
     description TEXT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    is_deleted BOOLEAN NOT NULL DEFAULT 0
+    is_deleted BOOLEAN NOT NULL DEFAULT 0,
     user_id INT NOT NULL 
 );
 
