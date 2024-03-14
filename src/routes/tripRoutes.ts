@@ -9,7 +9,7 @@ const tripsRouter = express.Router();
 // const fields = [
 //   'id','name','date','country','city','rating','description','price','user_id',
 // ];
-const tripCols = 'id,name,date,country,city,rating,description,price,user_id';
+const tripCols = 'id,name,date,country,city,rating,description,price,user_id,image_main';
 
 // GET - /trips/ - texta 'get all trips'
 tripsRouter.get('/', async (_req, res) => {
