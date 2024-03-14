@@ -6,6 +6,7 @@ Pradeti nuo boiler plate, su tailwind arba be.
 1. Prisideti routeri
 2. Sukurti Home, Trips, Countries puslapius
 3. Sukurti Header navigacijai
+4. Susikurti Button komponenta (UI)
 
 ## Trip Page
 
