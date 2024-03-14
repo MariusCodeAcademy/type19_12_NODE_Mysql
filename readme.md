@@ -1,12 +1,5 @@
 # Praktika
 
-## tripsRouter.ts
-
-1. panaudoti dbQueryWithData ir sukurti nauja irasa
-2. DELETE /trips/:id - pakeicia is_deleted i true
-
-3. GET /trips/archive - grazina visus istrintus irasus
-
 ## counties lentele
 
 1. sukurti lentele "countries" su laukais: id, name, description, is_deleted
