@@ -59,12 +59,10 @@ tripsRouter.get('/:tripId', async (req, res) => {
 tripsRouter.post('/', async (req, res) => {
   // tai kas atsiusta gyvena ?
 
-  const { name, date, country, city, rating, description, price, user_id } = req.body as Omit<
-    TripObjType,
-    'id'
-  >;
+  const { name, date, country, city, rating, description, price, user_id, image_main } =
+    req.body as Omit<TripObjType, 'id'>;
   // validation
-  const argArr = [name, date, country, city, rating, description, price, user_id];
+  const argArr = [name, date, country, city, rating, description, price, user_id, image_main];
 
   // panaudoti dbQueryWithData ir sukurti nauja irasa
 
