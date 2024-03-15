@@ -113,7 +113,7 @@ tripsRouter.post('/', async (req, res) => {
 tripsRouter.delete('/:tripId', async (req, res) => {
   const currentId = req.params.tripId;
 
-  const sql = `UPDATE trips SET is_deleted=1 WHERE id=?`;
+  const sql = `UPDATE trips SET is_deleted=1 WHERE id=? LIMIT 1`;
 
   const [rows, error] = (await dbQueryWithData(sql, [currentId])) as [ResultSetHeader, Error];
 
@@ -125,7 +125,7 @@ tripsRouter.delete('/:tripId', async (req, res) => {
 
   if (rows.affectedRows === 0) {
     console.log('no rows');
-    return res.status(404).json({ msg: `trip with id: '${currentId}' was not found` });
+    return res.status(404).json({ error: `trip with id: '${currentId}' was not found` });
   }
 
   res.json({ msg: `trip with id: '${currentId}' was deleted` });

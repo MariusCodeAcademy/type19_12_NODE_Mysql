@@ -21,3 +21,6 @@ Content-Type: application/json
     "user_id": 2,
     "image_main": "trip.jpg"
 }
+
+### Delete single Trip
+DELETE  http://localhost:3000/trips/5
