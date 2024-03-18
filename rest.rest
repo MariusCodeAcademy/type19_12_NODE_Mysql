@@ -12,9 +12,9 @@ Content-Type: application/json
 
 {
     "name": "Trip to Uzbekistan",
-    "date": "204-10-09",
+    "date": "2004-10-09",
     "country": "Uzbekistan",
-    "city": "Tumur",
+    "city": "",
     "rating": 4,
     "description": "Uzbekistan is very beautiful",
     "price": 700,
