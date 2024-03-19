@@ -23,7 +23,7 @@ export async function checkTripBody(req: Request, res: Response, next: NextFunct
     console.log('rez ===', rez);
     // next();
     res.json(rez);
-  } catch (error) {
+  } catch (error: any) {
     console.log('validation fail', error);
     // TODO: Suformuoti atsakyma kad gyztu klaidu masyvas su objektais kuria yra path, ir error message
     //
@@ -33,6 +33,14 @@ export async function checkTripBody(req: Request, res: Response, next: NextFunct
     // path: erro message,
     // path: erro message,
     // }
-    return res.status(400).json(error);
+
+    const obj = {};
+    const errorsFormed = error.inner.map((eObj) => {
+      // return { path: eObj.path, msg: eObj.message };
+      const key = eObj.path;
+      return { ...obj, [key]: eObj.message };
+    });
+
+    return res.status(400).json(errorsFormed);
   }
 }

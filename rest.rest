@@ -19,6 +19,7 @@ Content-Type: application/json
     "description": "Uzbekistan is very beautiful",
     "price": 700,
     "user_id": 2,
+    "image_1": "",
     "image_main": "trip.jpg"
 }
 
