@@ -1,3 +1,5 @@
+### Filter
+GET http://localhost:3000/trips/filter?country=france&price=500
 ### Get all Trips
 GET http://localhost:3000/trips
 ### Get all Trips 404
@@ -19,7 +21,7 @@ Content-Type: application/json
     "description": "Uzbekistan is very beautiful",
     "price": 700,
     "user_id": 2,
-    "image_1": "",
+    "images_1": "",
     "image_main": "trip.jpg"
 }
 
