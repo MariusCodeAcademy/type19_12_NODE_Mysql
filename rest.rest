@@ -1,5 +1,9 @@
 ### Filter
 GET http://localhost:3000/trips/filter?country=United Kingdom
+### Filter complex
+GET http://localhost:3000/trips/filter?country=france&city=paris
+### Filter complex
+GET http://localhost:3000/trips/filter?city=mur mur
 
 ### Get all Trips
 GET http://localhost:3000/trips
