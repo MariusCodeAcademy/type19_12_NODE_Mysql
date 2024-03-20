@@ -6,6 +6,8 @@ import cors from 'cors';
 import tripsRouter from './routes/tripRoutes.js';
 import { PORT } from './config.js';
 import testConnection from './helpers/msqlTestRoute.js';
+import countriesRouter from './routes/countriesRoutes.js';
+import authRouter from './routes/authRoutes.js';
 
 const app = express();
 
@@ -25,7 +27,9 @@ app.get('/', (_req, res) => {
 });
 
 // Routes
+app.use('/auth', authRouter);
 app.use('/trips', tripsRouter);
+app.use('/countries', countriesRouter);
 
 // 404
 

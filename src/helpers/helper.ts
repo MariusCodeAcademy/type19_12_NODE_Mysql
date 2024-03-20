@@ -1,6 +1,8 @@
 import mysql from 'mysql2/promise';
 import { dbConfig } from '../config.js';
 
+type QueryResult<T> = [T, null] | [null, Error];
+
 export default async function dbQueryWithData(sql: string, argArr: (string | number)[] = []) {
   let conn;
   try {
