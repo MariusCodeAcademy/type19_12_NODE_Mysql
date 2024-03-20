@@ -6,6 +6,8 @@ GET http://localhost:3000/trips/filter?country=france&city=paris
 GET http://localhost:3000/trips/filter?city=mur mur
 ### Filter complex
 GET http://localhost:3000/trips/filter?rating=3&city=beach
+### Filter complex
+GET http://localhost:3000/trips/filter
 
 ### Get all Trips
 GET http://localhost:3000/trips

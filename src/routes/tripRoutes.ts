@@ -67,7 +67,7 @@ tripsRouter.get('/filter', async (req, res) => {
   const cityVal = req.query.city?.toString();
   const rating = req.query.rating?.toString();
 
-  if (!countryVal && !cityVal && !rating) return res.status(400).json('no country/city given');
+  // if (!countryVal && !cityVal && !rating) return res.status(400).json('no country/city given');
 
   // kreiptis i duomenu base ir pariusti tik tos salies objektus
   let sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0`;
@@ -84,7 +84,7 @@ tripsRouter.get('/filter', async (req, res) => {
   }
 
   if (rating) {
-    sql += ` AND rating > ?`;
+    sql += ` AND rating >= ?`;
     argArr.push(rating);
   }
 
