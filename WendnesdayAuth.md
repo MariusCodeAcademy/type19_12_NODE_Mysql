@@ -2,6 +2,8 @@
 
 1. login route back end ![](assets/2024-03-20-12-01-01.png)
 
+https://www.npmjs.com/package/bcryptjs
+
 ## Front end
 
 1. sukurti contexta ir suteikti visai aplikacijai
