@@ -26,6 +26,7 @@ app.get('/', (_req, res) => {
   res.json({ msg: 'server is running' });
 });
 
+console.log('Ar prisijungimas prie server.ts');
 // Routes
 app.use('/auth', authRouter);
 app.use('/trips', tripsRouter);

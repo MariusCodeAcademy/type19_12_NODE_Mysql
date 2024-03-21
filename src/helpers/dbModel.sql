@@ -50,3 +50,4 @@ VALUES
 ('France', 'France is a country located in Western Europe. It is known for its wine, cheese, and the Eiffel Tower.', 'france.jpg'),
 ('United Kingdom', 'The United Kingdom is a country located off the northwestern coast of mainland Europe. It is made up of four countries: England, Scotland, Wales, and Northern Ireland.', 'uk.jpg'),
 ('Italy', 'Italy is a country located in Southern Europe. It is known for its art, architecture, and food.', 'italy.jpg');
+

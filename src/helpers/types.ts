@@ -17,7 +17,8 @@ export type TripObjType = {
 export type TripObjTypeNoId = Omit<TripObjType, 'id'>;
 
 export type UserObjType = {
-  id: number;
+  id?: number;
+  name?: string;
   email: string;
   password: string;
 };
