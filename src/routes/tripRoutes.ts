@@ -108,6 +108,25 @@ tripsRouter.get('/filter', async (req, res) => {
   // res.json(countryVal);
 });
 
+// GET /trips/user/id/1
+tripsRouter.get('/user/id/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND user_id=?`;
+
+  const [rows, error] = await dbQueryWithData<TripObjType[]>(sql, [userId]);
+
+  if (error) {
+    console.warn('get all trips error ===', error);
+    console.warn('error ===', error.message);
+    return res.status(400).json({ error: 'something went wrong' });
+  }
+
+  // console.log('row ===', row[0]);
+
+  // gauti visus trips objektus masyvo pavidalu
+  res.json(rows);
+});
+
 // - GET /trips/:id - grazinti viena irasa pagal id
 tripsRouter.get('/:tripId', async (req, res) => {
   const currentId = req.params.tripId;
@@ -172,7 +191,7 @@ tripsRouter.post('/', checkTripBody, async (req, res) => {
   const sql = `INSERT INTO trips (name, date, country, city, rating, description, price, user_id, image_main, images_1, images_2, images_3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`;
 
   // jei sekmingai sukurta grzinti naujai sukurto iraso id
-  const [rows, error] = (await dbQueryWithData(sql, argArr)) as [ResultSetHeader, Error];
+  const [rows, error] = await dbQueryWithData<ResultSetHeader>(sql, argArr);
 
   // grazinti pilna nauja objekta
   if (error) {
@@ -194,7 +213,7 @@ tripsRouter.delete('/:tripId', async (req, res) => {
 
   const sql = `UPDATE trips SET is_deleted=1 WHERE id=? LIMIT 1`;
 
-  const [rows, error] = (await dbQueryWithData(sql, [currentId])) as [ResultSetHeader, Error];
+  const [rows, error] = await dbQueryWithData<ResultSetHeader>(sql, [currentId]);
 
   if (error) {
     console.warn('istrinti irasa pakeiciant is_deleted i 1 error ===', error);

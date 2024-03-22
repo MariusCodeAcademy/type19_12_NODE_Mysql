@@ -11,6 +11,9 @@ GET http://localhost:3000/trips/filter
 
 ### Get all Trips
 GET http://localhost:3000/trips
+### Get all user Trips
+GET http://localhost:3000/trips/user/id/23
+
 
 ### Get all Trips 404
 GET http://localhost:3000/trips4004
