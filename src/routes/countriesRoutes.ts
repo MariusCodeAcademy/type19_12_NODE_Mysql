@@ -9,7 +9,7 @@ const countriesRouter = express.Router();
 // GET - /countries/ - texta 'get all countries'
 countriesRouter.get('/', async (_req, res) => {
   // panaudoti dbQueryWithData
-  const sql = `SELECT id,name FROM countries WHERE is_deleted=0`;
+  const sql = `SELECT id,name,description,image_main FROM countries WHERE is_deleted=0`;
   const [row, error] = await dbQueryWithData<CountryObjType[]>(sql);
 
   if (error) {
