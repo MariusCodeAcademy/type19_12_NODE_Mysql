@@ -22,3 +22,11 @@ export type UserObjType = {
   email: string;
   password: string;
 };
+
+export type CountryObjType = {
+  id: number;
+  name: string;
+  description: string;
+  image_main: string;
+  created_at: string;
+};

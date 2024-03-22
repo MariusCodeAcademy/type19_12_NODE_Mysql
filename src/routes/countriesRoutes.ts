@@ -1,41 +1,22 @@
 // create a countriesRouter
 import express from 'express';
 import dbQueryWithData from '../helpers/helper.js';
+import { ResultSetHeader } from 'mysql2';
+import { CountryObjType } from '../helpers/types.js';
 
 const countriesRouter = express.Router();
-
-/*
-CREATE TABLE countries (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    image_main VARCHAR(255) NOT NULL,
-    is_deleted BOOLEAN NOT NULL DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-*/
-
-type CountryObjType = {
-  id: number;
-  name: string;
-  description: string;
-  image_main: string;
-  created_at: string;
-};
 
 // GET - /countries/ - texta 'get all countries'
 countriesRouter.get('/', async (_req, res) => {
   // panaudoti dbQueryWithData
   const sql = `SELECT id,name FROM countries WHERE is_deleted=0`;
-  const [row, error] = (await dbQueryWithData(sql)) as [CountryObjType[], Error];
+  const [row, error] = await dbQueryWithData<CountryObjType[]>(sql);
 
   if (error) {
     console.warn('get all countries error ===', error);
     console.warn('error ===', error.message);
     return res.status(400).json({ error: 'something went wrong' });
   }
-
-  console.log('row ===', row[0]);
 
   // gauti visus countries objektus masyvo pavidalu
   res.json(row);
@@ -47,7 +28,7 @@ countriesRouter.get('/:countryId', async (req, res) => {
 
   const sql = `SELECT id,name,description,image_main FROM countries WHERE is_deleted=0 AND id=?`;
 
-  const [rows, error] = (await dbQueryWithData(sql, [currentId])) as [CountryObjType[], Error];
+  const [rows, error] = await dbQueryWithData<CountryObjType[]>(sql, [currentId]);
 
   if (error) {
     console.warn('grazinti viena irasa pagal id error ===', error);
@@ -73,10 +54,11 @@ countriesRouter.post('/', async (req, res) => {
 
   const sql = `INSERT INTO countries (name, description, image_main) VALUES (?,?,?)`;
 
-  const [rows, error] = (await dbQueryWithData(sql, [name, description, image_main])) as [
-    CountryObjType[],
-    Error,
-  ];
+  const [rows, error] = await dbQueryWithData<ResultSetHeader>(sql, [
+    name,
+    description,
+    image_main,
+  ]);
 
   if (error) {
     console.warn('sukurti nauja irasa error ===', error);
@@ -86,7 +68,7 @@ countriesRouter.post('/', async (req, res) => {
 
   // console.log('rows ===', rows);
 
-  res.json(rows);
+  res.json({ id: rows.insertId, name, description, image_main });
 });
 
 export default countriesRouter;
