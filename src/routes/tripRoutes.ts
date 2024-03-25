@@ -229,8 +229,19 @@ tripsRouter.post('/', checkTripBody, async (req, res) => {
 
 tripsRouter.delete('/:tripId', async (req, res) => {
   const currentId = req.params.tripId;
+  console.log('req.body ===', req.body);
+  console.log('currentId ===', currentId);
+  const tripUserId = '';
+
+  // gauti ir palyginti tripUserId
+  // jei useris ne saviningkas pranesti su 403
+  if (req.body.userId.toString() !== currentId) {
+    return res.status(401).json({ error: 'only owner can delete' });
+  }
 
   const sql = `UPDATE trips SET is_deleted=1 WHERE id=? LIMIT 1`;
+
+  return;
 
   const [rows, error] = await dbQueryWithData<ResultSetHeader>(sql, [currentId]);
 
