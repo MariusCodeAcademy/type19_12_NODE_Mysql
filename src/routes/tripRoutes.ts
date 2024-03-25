@@ -144,7 +144,13 @@ tripsRouter.get('/user/id/:userId', async (req, res) => {
 tripsRouter.get('/:tripId', async (req, res) => {
   const currentId = req.params.tripId;
 
-  const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND id=?`;
+  // const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND id=?`;
+  let sql = `
+  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+  FROM trips
+  LEFT JOIN users
+  ON trips.user_id = users.id
+  WHERE trips.is_deleted = 0 AND trips.id=?`;
 
   const [rows, error] = await dbQueryWithData<TripObjType[]>(sql, [currentId]);
 
