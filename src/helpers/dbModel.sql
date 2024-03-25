@@ -51,3 +51,11 @@ VALUES
 ('United Kingdom', 'The United Kingdom is a country located off the northwestern coast of mainland Europe. It is made up of four countries: England, Scotland, Wales, and Northern Ireland.', 'uk.jpg'),
 ('Italy', 'Italy is a country located in Southern Europe. It is known for its art, architecture, and food.', 'italy.jpg');
 
+
+
+-- get all trips with user email
+SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+FROM trips
+LEFT JOIN users
+ON trips.user_id = users.id
+WHERE trips.is_deleted = 0
