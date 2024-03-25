@@ -40,7 +40,7 @@ tripsRouter.get('/', async (_req, res) => {
 // Get - trips/cities - grazinti visus unikalius miestus
 tripsRouter.get('/cities', async (_req, res) => {
   const sql = `SELECT DISTINCT city FROM trips WHERE is_deleted=0`;
-  const [row, error] = (await dbQueryWithData(sql)) as [TripObjType[], Error];
+  const [row, error] = await dbQueryWithData<TripObjType[]>(sql);
 
   if (error) {
     console.warn('get all cities error ===', error);
@@ -99,7 +99,7 @@ tripsRouter.get('/filter', async (req, res) => {
 
   // const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND country = ? AND city = ?`;
   // const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND country = ? AND city = ? AND raing ? ?`;
-  const [row, error] = (await dbQueryWithData(sql, argArr)) as [TripObjType[], Error];
+  const [row, error] = await dbQueryWithData<TripObjType[]>(sql, argArr);
 
   if (error) {
     console.warn('get all trips error ===', error);
@@ -140,7 +140,7 @@ tripsRouter.get('/:tripId', async (req, res) => {
 
   const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND id=?`;
 
-  const [rows, error] = (await dbQueryWithData(sql, [currentId])) as [TripObjType[], Error];
+  const [rows, error] = await dbQueryWithData<TripObjType[]>(sql, [currentId]);
 
   if (error) {
     console.warn('grazinti viena irasa pagal id error ===', error);
