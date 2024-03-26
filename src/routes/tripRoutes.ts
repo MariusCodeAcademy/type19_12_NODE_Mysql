@@ -37,6 +37,8 @@ tripsRouter.get('/', async (_req, res) => {
   res.json(row);
 });
 
+// GET - /trips/deleted - texta 'get all trips archive'
+
 // Get - trips/cities - grazinti visus unikalius miestus
 tripsRouter.get('/cities', async (_req, res) => {
   const sql = `SELECT DISTINCT city FROM trips WHERE is_deleted=0`;

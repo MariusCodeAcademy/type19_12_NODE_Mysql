@@ -20,6 +20,8 @@ GET http://localhost:3000/trips4004
 
 ### Get single Trip
 GET http://localhost:3000/trips/1
+### Get single Trip
+GET http://localhost:3000/trips/deleted
 
 ### Create trip
 POST http://localhost:3000/trips
@@ -44,3 +46,6 @@ DELETE  http://localhost:3000/trips/5
 ### get all countries
 
 GET http://localhost:3000/countries
+### get all countries
+
+GET http://localhost:3000/countries/1
