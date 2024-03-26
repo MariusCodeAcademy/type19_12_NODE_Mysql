@@ -38,6 +38,28 @@ tripsRouter.get('/', async (_req, res) => {
 });
 
 // GET - /trips/deleted - texta 'get all trips archive'
+tripsRouter.get('/deleted', async (_req, res) => {
+  // panaudoti dbQueryWithData
+  const sql = `
+  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+  FROM trips
+  LEFT JOIN users
+  ON trips.user_id = users.id
+  WHERE trips.is_deleted = 1
+  `;
+  const [row, error] = await dbQueryWithData<TripObjType[]>(sql);
+
+  if (error) {
+    console.warn('get all trips error ===', error);
+    console.warn('error ===', error.message);
+    return res.status(400).json({ error: 'something went wrong' });
+  }
+
+  console.log('row ===', row[0]);
+
+  // gauti visus trips objektus masyvo pavidalu
+  res.json(row);
+});
 
 // Get - trips/cities - grazinti visus unikalius miestus
 tripsRouter.get('/cities', async (_req, res) => {
