@@ -31,3 +31,10 @@ export type CountryObjType = {
   image_main: string;
   created_at: string;
 };
+
+export type UpdateUserObjType = {
+  name?: string;
+  email: string;
+  currentPassword: string;
+  password: string;
+};
