@@ -5,7 +5,7 @@ import { UserObjType } from '../helpers/types.js';
 const usersRouter = express.Router();
 
 // routes
-// /users/:userId - gausim username
+// GET /users/:userId - gausim username
 usersRouter.get('/:userId', async (req, res) => {
   const userId = req.params.userId;
 
@@ -27,5 +27,9 @@ usersRouter.get('/:userId', async (req, res) => {
 
   res.json(userArr[0]);
 });
+
+// atnaujinti username
+// PUT/PATCH - /users/update/name/:userId - atnaujina vartotojo varda kurio id yra userId
+// updatedName request body
 
 export default usersRouter;
