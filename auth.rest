@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### Get User
-GET http://localhost:3000/users/15
+GET http://localhost:3000/users/23
