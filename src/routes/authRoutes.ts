@@ -104,7 +104,7 @@ authRouter.put('/user/update/:userId', async (req, res) => {
   console.log('userObj ===', userObj);
   // patikrinti slaptazodziai
   // lyginam req.body.currentPassword(plain) su userObj.password(hash)
-  const arSutampaSlaptazodziai = await bcrypt.compare(currentPassword, userObj.password);
+  const arSutampaSlaptazodziai = await bcrypt.compare(currentPassword.toString(), userObj.password);
   if (!arSutampaSlaptazodziai) {
     return res
       .status(400)
@@ -112,13 +112,20 @@ authRouter.put('/user/update/:userId', async (req, res) => {
   }
 
   const passwordHash = await bcrypt.hash(newPassword, 10);
-  const sql = 'nustato user su id userId slaptazodi i passwordHash';
-  const [result, insertError] = await dbQueryWithData<ResultSetHeader>(sql, []);
+  //nustato user su id userId slaptazodi i passwordHash
+  const sql = `UPDATE users SET password = ? WHERE id = ?`;
+  const [result, insertError] = await dbQueryWithData<ResultSetHeader>(sql, [passwordHash, userId]);
   // jei sutampa register logic
-  // slaptazodi is bodu hashinam su bcrypt
-  // irasom i db su sql uzklausa
+  if (insertError) {
+    console.warn('password/user update ===', insertError);
+    return res.status(500).json({ error: 'something went wrong' });
+  }
 
-  res.json({ user: userObj.email });
+  if (result.affectedRows === 0) {
+    return res.status(400).json('Nothing changed');
+  }
+
+  res.json({ success: true });
 });
 
 export default authRouter;

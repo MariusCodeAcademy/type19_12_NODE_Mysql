@@ -79,3 +79,10 @@ FROM trips
 LEFT JOIN users
 ON trips.user_id = users.id
 WHERE trips.is_deleted = 0
+
+-- get all trips for single country by id 
+SELECT trips.*
+FROM trips
+RIGHT JOIN countries
+ON trips.country = countries.name
+WHERE countries.id = 2 AND trips.is_deleted = 0

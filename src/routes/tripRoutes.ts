@@ -199,6 +199,8 @@ tripsRouter.get('/:tripId', async (req, res) => {
   res.json(rows[0]);
 });
 
+// GET /trips/byCountry/1 - grazina visa keliones is salies kurios id 1
+
 // - POST /trips - sukurti nauja irasa
 tripsRouter.post('/', checkTripBody, async (req, res) => {
   // tai kas atsiusta gyvena ?
