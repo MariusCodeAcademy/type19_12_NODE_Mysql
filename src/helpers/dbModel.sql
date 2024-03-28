@@ -81,7 +81,7 @@ ON trips.user_id = users.id
 WHERE trips.is_deleted = 0
 
 -- get all trips for single country by id 
-SELECT trips.*
+SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3
 FROM trips
 RIGHT JOIN countries
 ON trips.country = countries.name
