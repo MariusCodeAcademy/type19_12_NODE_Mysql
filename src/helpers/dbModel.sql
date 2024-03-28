@@ -7,6 +7,8 @@ CREATE TABLE users (
 )
 -- lentele
 
+
+
 CREATE TABLE trips (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -86,3 +88,12 @@ FROM trips
 RIGHT JOIN countries
 ON trips.country = countries.name
 WHERE countries.id = 2 AND trips.is_deleted = 0
+
+
+-- sukurti Likes lentele su id, trip_id, user_id, created_at
+CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    trip_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
