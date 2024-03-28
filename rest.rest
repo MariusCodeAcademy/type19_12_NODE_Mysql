@@ -52,3 +52,8 @@ GET http://localhost:3000/countries
 ### get all countries
 
 GET http://localhost:3000/countries/1
+
+### LIKES API
+
+
+POST  http://localhost:3000/likes
