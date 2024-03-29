@@ -55,8 +55,8 @@ GET http://localhost:3000/countries/1
 
 ### LIKES API
 
-POST  http://localhost:3000/likes
+POST http://localhost:3000/likes
 
 ### user LIKES trip
 
-GET   http://localhost:3000/likes/user/26/3
+GET http://localhost:3000/likes/user/26/3
