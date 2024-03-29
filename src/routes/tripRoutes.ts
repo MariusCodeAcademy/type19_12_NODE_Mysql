@@ -17,11 +17,14 @@ const tripCols =
 tripsRouter.get('/', async (_req, res) => {
   // panaudoti dbQueryWithData
   const sql = `
-  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email, COUNT(likes.id) as likes
   FROM trips
   LEFT JOIN users
   ON trips.user_id = users.id
+  LEFT JOIN likes
+  ON trips.id = likes.trip_id
   WHERE trips.is_deleted = 0
+  GROUP BY trips.id
   `;
   const [row, error] = await dbQueryWithData<TripObjType[]>(sql);
 
@@ -173,11 +176,14 @@ tripsRouter.get('/:tripId', async (req, res) => {
 
   // const sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0 AND id=?`;
   let sql = `
-  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email, COUNT(likes.id) as likes
   FROM trips
   LEFT JOIN users
   ON trips.user_id = users.id
-  WHERE trips.is_deleted = 0 AND trips.id=?`;
+  LEFT JOIN likes
+  ON trips.id = likes.trip_id
+  WHERE trips.is_deleted = 0 AND trips.id=?
+  GROUP BY trips.id`;
 
   const [rows, error] = await dbQueryWithData<TripObjType[]>(sql, [currentId]);
 

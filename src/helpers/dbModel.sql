@@ -96,4 +96,48 @@ CREATE TABLE likes (
     trip_id INT NOT NULL,
     user_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    UNIQUE(trip_id, user_id)
 );
+
+-- allow only one like per user per trip
+ALTER TABLE likes
+ADD UNIQUE KEY(trip_id, user_id);
+
+-- keletas irasu
+INSERT INTO likes (trip_id, user_id)
+VALUES 
+(1, 1),
+(1, 2);
+
+
+-- get all trips with user email and likes count
+SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email, COUNT(likes.id) as likes
+FROM trips
+LEFT JOIN users
+ON trips.user_id = users.id
+LEFT JOIN likes
+ON trips.id = likes.trip_id
+WHERE trips.is_deleted = 0
+GROUP BY trips.id
+
+-- get single trip with user email and likes count
+SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email, COUNT(likes.id) as likes
+FROM trips
+LEFT JOIN users
+ON trips.user_id = users.id
+LEFT JOIN likes
+ON trips.id = likes.trip_id
+WHERE trips.id = 1 AND trips.is_deleted = 0
+GROUP BY trips.id
+
+
+-- get all trips for single country by id with likes count
+SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, COUNT(likes.id) as likes
+FROM trips
+RIGHT JOIN countries
+ON trips.country = countries.name
+LEFT JOIN likes
+ON trips.id = likes.trip_id
+WHERE countries.id = 2 AND trips.is_deleted = 0
+GROUP BY trips.id
+
