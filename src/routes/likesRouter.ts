@@ -30,4 +30,27 @@ likesRouter.post('/', async (req, res) => {
 
 // GET - /likes/:tripId grazina visus tos keliones likes
 
+// GET - /likes/user/:userId ar sitas uzeris palaikino post
+likesRouter.get('/user/:userId/:tripId', async (req, res) => {
+  const { userId, tripId } = req.params;
+
+  const sql = 'SELECT * FROM likes WHERE user_id = ? AND trip_id = ?';
+
+  const [rows, err] = await dbQueryWithData<object[]>(sql, [userId, tripId]);
+
+  if (err) {
+    console.warn('sukurs nauja irasa likes lenteleje ===', err);
+    console.warn('error ===', err.message);
+    return res.status(500).json({ error: 'something went wrong' });
+  }
+
+  console.log('rows ===', rows);
+
+  if (rows.length === 0) {
+    return res.json(false);
+  }
+
+  res.json(true);
+});
+
 export default likesRouter;

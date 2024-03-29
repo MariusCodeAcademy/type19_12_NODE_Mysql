@@ -108,10 +108,12 @@ tripsRouter.get('/filter', async (req, res) => {
 
   // kreiptis i duomenu base ir pariusti tik tos salies objektus
   let sql = `
-  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email
+  SELECT trips.id,trips.name,trips.date,trips.country,trips.city,trips.rating,trips.description,trips.price,trips.user_id,trips.image_main,trips.images_1,trips.images_2,trips.images_3, users.email, COUNT(likes.id) as likes
   FROM trips
   LEFT JOIN users
   ON trips.user_id = users.id
+  LEFT JOIN likes
+  ON trips.id = likes.trip_id
   WHERE trips.is_deleted = 0`;
   // let sql = `SELECT ${tripCols} FROM trips WHERE is_deleted=0`;
   let argArr = [];
@@ -130,6 +132,8 @@ tripsRouter.get('/filter', async (req, res) => {
     sql += ` AND rating >= ?`;
     argArr.push(rating);
   }
+
+  sql += ' GROUP BY trips.id';
 
   // prideti rating
 
