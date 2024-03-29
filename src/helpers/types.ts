@@ -38,3 +38,10 @@ export type UpdateUserObjType = {
   currentPassword: string;
   password: string;
 };
+
+export type LikeObj = {
+  id: number;
+  trip_id: number;
+  user_id: number;
+  created_at: string;
+};
